@@ -29,6 +29,7 @@ public class CreateAccountTests extends TestBase {
     @Test
     public void createExistingAccountNegativeTest() {
         SoftAssert softAssert = new SoftAssert();
+        logger.info("Existing account data are " + UserData.EMAIL + " " + UserData.PASSWORD);
         app.getUser().clickOnLoginLink();
         app.getUser().fillRegisterLoginForm(new User()
                 .setEmail(UserData.EMAIL)
