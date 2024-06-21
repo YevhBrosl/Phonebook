@@ -1,18 +1,40 @@
-package com.phonebook.tests;
+package com.phonebook.fw;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.sql.Driver;
 import java.time.Duration;
 
 public class ApplicationManager{
+    String browser;
     WebDriver driver;
     UserHelper user;
     ContactHelper contact;
     HomePageHelper homePage;
 
+    public ApplicationManager(String browser) {
+        this.browser = browser;
+    }
+
     public void init() {
-        driver = new ChromeDriver();
+
+        System.err.close();
+
+        if (browser.equalsIgnoreCase("chrome")) {
+            driver = new ChromeDriver();
+        } else if (browser.equalsIgnoreCase("firefox")) {
+            driver = new FirefoxDriver();
+        } else if (browser.equalsIgnoreCase("edge")) {
+            driver = new EdgeDriver();
+        }
+
+        //gradle clean <task name> -> Chrome
+        //gradle -Pbrowser=firefox clean qa -> Mozilla
+        //gradle -Pbrowser=edge clean qa -> Edge
+
         driver.get("https://telranedu.web.app");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
