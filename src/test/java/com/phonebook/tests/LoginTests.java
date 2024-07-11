@@ -5,6 +5,9 @@ import com.phonebook.models.User;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
+import java.awt.*;
+import java.io.IOException;
+
 public class LoginTests extends TestBase {
 
 //    @BeforeClass
@@ -53,5 +56,19 @@ public class LoginTests extends TestBase {
                 .setPassword(UserData.PASSWORD));
         app.getUser().clickOnLoginButton();
         Assert.assertTrue(app.getUser().isAlertPresent());
+    }
+
+    @Test(priority = 1)
+    public void loginPositiveTestWithScreenCast() throws IOException, AWTException {
+        app.getUser().deleteScreenCast("record");
+        app.getUser().startRecording();
+        app.getUser().clickOnLoginLink();
+        app.getUser().fillRegisterLoginFormForRecording(new User()
+                .setEmail(UserData.EMAIL)
+                .setPassword(UserData.PASSWORD));
+        app.getUser().clickOnLoginButton();
+        Assert.assertTrue(app.getUser().isSignOutButtonPresent());
+        app.getUser().pause(3000);
+        app.getUser().stopRecording();
     }
 }

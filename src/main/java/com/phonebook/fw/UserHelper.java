@@ -22,6 +22,13 @@ public class UserHelper extends BaseHelper{
         type(By.name("password"), user.getPassword());
     }
 
+    public void fillRegisterLoginFormForRecording(User user) {
+        type(By.name("email"), user.getEmail());
+        pause(2000);
+        type(By.name("password"), user.getPassword());
+        pause(2000);
+    }
+
     public void clickOnLoginLink() {
         click(By.cssSelector("[href='/login']"));
     }
@@ -48,4 +55,5 @@ public class UserHelper extends BaseHelper{
         driver.findElement(By.name("password")).click();
         driver.findElement(By.name("password")).clear();
     }
+
 }
